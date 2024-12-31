@@ -20,7 +20,7 @@ public class Route {
     @Bean
     public RouterFunction<ServerResponse> productServiceRoute(){
         return route("product_service")
-                .route(RequestPredicates.path("/product/*"), HandlerFunctions.http("http://localhost:8080"))
+                .route(RequestPredicates.path("/api/product/*"), HandlerFunctions.http("http://localhost:8080"))
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("productServiceCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .build();
     }
