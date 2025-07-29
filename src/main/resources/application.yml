@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: workflow-engine
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:h2:mem:workflowdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  
+  # H2 Console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Flowable Configuration
+flowable:
+  database-schema-update: true
+  async-executor-activate: true
+  history-level: full
+  db-identity-used: true
+  check-process-definitions: true
+  deployment-mode: never-fail
+  enable-safe-xml: true
+  # Additional Flowable 6.x specific configurations
+  process:
+    definition-location-prefix: classpath*:/processes/
+    definition-location-suffixes: "*.bpmn20.xml"
+
+# Logging
+logging:
+  level:
+    org.flowable: DEBUG
+    com.om.workflow: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
