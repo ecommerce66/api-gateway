@@ -1,0 +1,24 @@
+package com.example.flowableworkflow.entity;
+
+public enum TaskType {
+    USER_TASK,
+    SERVICE_TASK,
+    SCRIPT_TASK,
+    BUSINESS_RULE_TASK,
+    MANUAL_TASK,
+    RECEIVE_TASK,
+    SEND_TASK,
+    MAIL_TASK,
+    HTTP_TASK,
+    SHELL_TASK,
+    PARALLEL_GATEWAY,
+    EXCLUSIVE_GATEWAY,
+    INCLUSIVE_GATEWAY,
+    EVENT_GATEWAY,
+    START_EVENT,
+    END_EVENT,
+    INTERMEDIATE_EVENT,
+    BOUNDARY_EVENT,
+    CALL_ACTIVITY,
+    SUB_PROCESS
+}

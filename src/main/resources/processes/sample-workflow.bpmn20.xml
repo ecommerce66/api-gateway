@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="http://www.flowable.org/processdef">
+
+  <process id="sampleWorkflow" name="Sample Workflow" isExecutable="true">
+
+    <documentation>A sample workflow demonstrating user tasks and service tasks</documentation>
+
+    <startEvent id="startEvent" name="Start">
+      <outgoing>flow1</outgoing>
+    </startEvent>
+
+    <userTask id="task1" name="Review Request" flowable:assignee="reviewer" flowable:priority="50">
+      <documentation>Review and validate the incoming request</documentation>
+      <incoming>flow1</incoming>
+      <outgoing>flow2</outgoing>
+    </userTask>
+
+    <userTask id="task2" name="Approve Request" flowable:candidateGroups="managers" flowable:priority="70">
+      <documentation>Manager approval required for the request</documentation>
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+    </userTask>
+
+    <serviceTask id="task3" name="Process Request" flowable:class="com.example.flowableworkflow.delegate.ProcessRequestDelegate">
+      <documentation>Automatically process the approved request</documentation>
+      <incoming>flow3</incoming>
+      <outgoing>flow4</outgoing>
+    </serviceTask>
+
+    <userTask id="task4" name="Notify Completion" flowable:assignee="requester" flowable:priority="30">
+      <documentation>Notify the requester about completion</documentation>
+      <incoming>flow4</incoming>
+      <outgoing>flow5</outgoing>
+    </userTask>
+
+    <endEvent id="endEvent" name="End">
+      <incoming>flow5</incoming>
+    </endEvent>
+
+    <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="task1" />
+    <sequenceFlow id="flow2" sourceRef="task1" targetRef="task2" />
+    <sequenceFlow id="flow3" sourceRef="task2" targetRef="task3" />
+    <sequenceFlow id="flow4" sourceRef="task3" targetRef="task4" />
+    <sequenceFlow id="flow5" sourceRef="task4" targetRef="endEvent" />
+
+  </process>
+</definitions>
