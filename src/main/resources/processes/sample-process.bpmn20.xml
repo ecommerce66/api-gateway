@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://flowable.org/bpmn"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+
+  <process id="sample-process" name="Sample Process" isExecutable="true">
+    
+    <startEvent id="startEvent" name="Start Event">
+      <outgoing>flow1</outgoing>
+    </startEvent>
+    
+    <userTask id="task1" name="First Task" flowable:assignee="user1">
+      <incoming>flow1</incoming>
+      <outgoing>flow2</outgoing>
+    </userTask>
+    
+    <userTask id="task2" name="Second Task" flowable:assignee="user2">
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+    </userTask>
+    
+    <userTask id="task3" name="Third Task" flowable:assignee="user3">
+      <incoming>flow3</incoming>
+      <outgoing>flow4</outgoing>
+    </userTask>
+    
+    <endEvent id="endEvent" name="End Event">
+      <incoming>flow4</incoming>
+    </endEvent>
+    
+    <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="task1" />
+    <sequenceFlow id="flow2" sourceRef="task1" targetRef="task2" />
+    <sequenceFlow id="flow3" sourceRef="task2" targetRef="task3" />
+    <sequenceFlow id="flow4" sourceRef="task3" targetRef="endEvent" />
+    
+  </process>
+  
+</definitions>
