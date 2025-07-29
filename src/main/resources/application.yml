@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: flowable-workflow
+  datasource:
+    url: jdbc:h2:mem:workflowdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+
+# Flowable Configuration
+flowable:
+  database-schema-update: true
+  async-executor-activate: true
+  history-level: full
+  db-identity-used: true
+  check-process-definitions: true
+  process-definition-location-prefix: classpath*:/processes/
+  process-definition-location-suffixes: **.bpmn20.xml
+
+# Server Configuration
+server:
+  port: 8080
+
+# Logging
+logging:
+  level:
+    org.flowable: DEBUG
+    com.workflow: DEBUG
+    org.springframework.web: DEBUG

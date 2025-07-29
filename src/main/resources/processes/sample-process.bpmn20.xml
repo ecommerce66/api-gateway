@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://flowable.org/processdef"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+
+  <process id="sampleProcess" name="Sample Process" isExecutable="true">
+    
+    <startEvent id="startEvent" name="Start"/>
+    
+    <userTask id="task1" name="Review Document" 
+              flowable:assignee="john.doe"
+              flowable:priority="50"/>
+    
+    <userTask id="task2" name="Approve Document" 
+              flowable:assignee="jane.smith"
+              flowable:priority="75"/>
+    
+    <userTask id="task3" name="Final Review" 
+              flowable:assignee="manager"
+              flowable:priority="100"/>
+    
+    <endEvent id="endEvent" name="End"/>
+    
+    <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="task1"/>
+    <sequenceFlow id="flow2" sourceRef="task1" targetRef="task2"/>
+    <sequenceFlow id="flow3" sourceRef="task2" targetRef="task3"/>
+    <sequenceFlow id="flow4" sourceRef="task3" targetRef="endEvent"/>
+    
+  </process>
+  
+</definitions>
