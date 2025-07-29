@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/workflowdb
+    driver-class-name: org.postgresql.Driver
+    username: workflow
+    password: workflow123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+
+# Flowable Configuration
+flowable:
+  database-schema-update: true
+  async-executor-activate: true
+  history-level: full
+  db-identity-used: true
+  check-process-definitions: true
+  process-definition-location-prefix: classpath*:/processes/
+  process-definition-location-suffixes: **.bpmn20.xml
+
+# Server Configuration
+server:
+  port: 8080
+
+# Logging
+logging:
+  level:
+    org.flowable: INFO
+    com.workflow: INFO
+    org.springframework.web: INFO
